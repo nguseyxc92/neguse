@@ -1,0 +1,127 @@
+import { SoftwareProject } from '../types';
+
+export const SOFTWARE_PROJECTS: SoftwareProject[] = [
+  {
+    id: 'zijlweg-bayesian-reliability',
+    name: 'Zijlweg Bayesian Reliability Framework',
+    tagline: 'High-performance C++ & Python framework for Bayesian reliability updating from proof load monitoring data',
+    role: 'Lead Developer & Graduate Researcher',
+    repoUrl: 'https://github.com/nguseyxc92/zijlweg-bayesian-reliability',
+    techStack: ['C++', 'Python', 'MATLAB', 'Latin Hypercube Sampling', 'MCMC Metropolis-Hastings'],
+    architectureOverview: 'Three-stage analytical pipeline: MATLAB preprocessing of 36 raw sensor channels -> C++ high-performance Metropolis-Hastings MCMC core executing 10^8 samples per load step -> Python post-processing and convergence verification diagnostics (Gelman-Rubin statistic < 1.1, autocorrelation, trace plots).',
+    engineeringProblem: 'Field proof load testing generates massive multi-sensor time-series (forces, LVDT displacements, strains, and crack widths). Calculating posterior parameter distributions via traditional analytical methods is mathematically intractable. Standard interpreted languages (pure Python or MATLAB) require hours to reach 100 million MCMC samples per load step.',
+    implementationHighlights: [
+      'Implemented C++ Metropolis-Hastings MCMC sampling algorithm capable of generating 10^8 samples in 7-15 minutes in Release mode.',
+      'Developed 100-sample Latin Hypercube cross-section analyzer incorporating Thorenfeldt concrete model, plain-bar steel QR22/QR24 plasticity, and 4 bottom reinforcement layers.',
+      'Engineered likelihood conditioning based on proof load survival (Z_PL > 0) with 0.70 correlation between test load and traffic model uncertainties.',
+      'Integrated CSCT and CSDT mechanics-based stop criteria indicators directly alongside Bayesian updates.',
+    ],
+    technicalDecisions: [
+      'Separated sensor calibration (MATLAB) from sampling engine (C++) to ensure high simulation throughput.',
+      'Corrected statistical constructors to strictly distinguish between standard deviation and coefficient of variation (preventing near-zero reliability estimation bugs).',
+      'Configured 1,000-sample burn-in per thread to eliminate initialization bias.',
+    ],
+    status: 'Active Open Source',
+    limitations: [
+      'Currently configured for single-span solid slab cross-sections; requires expansion for multi-girder bridge configurations.',
+    ],
+    license: 'MIT License',
+  },
+  {
+    id: 'culvert-twin',
+    name: 'Culvert Digital Twin & Surrogate Engine',
+    tagline: 'Deep-learning surrogate neural ensemble for EPA SWMM 5 predictive capacity auditing and maintenance',
+    role: 'Lead Architect & Engineer',
+    repoUrl: 'https://github.com/nguseyxc92/culvert_twin',
+    techStack: ['Python', 'PySWMM', 'EPA SWMM 5.2', 'Scikit-Learn', 'NumPy', 'SciPy'],
+    architectureOverview: 'Dynamic-wave hydraulic automation chain: Latin Hypercube sampling across 5 uncertain parameters -> Automated PySWMM headless simulation generating 72,000 node states -> 5-network neural ensemble training with cross-validation -> Real-time condition-based maintenance threshold evaluator.',
+    engineeringProblem: 'Dynamic-wave hydraulic routing through 1D/2D culvert corridors is computationally expensive, preventing real-time probabilistic risk assessment and large-scale Monte Carlo uncertainty propagation (100,000+ draws) under uncertain rainfall and progressive siltation.',
+    implementationHighlights: [
+      'Constructed a 5-network Artificial Neural Network (ANN) ensemble reproducing full dynamic-wave flood volumes with R² = 0.998 on held-out samples.',
+      'Achieved an ~8,000x computational speedup, slashing simulation latency from minutes to milliseconds.',
+      'Implemented Sobol variance-based global sensitivity analysis revealing siltation as governing parameter (total effect 0.84 to 0.89).',
+      'Engineered an actionable 10-year condition-based desilting matrix based on a 5% failure probability ceiling.',
+    ],
+    technicalDecisions: [
+      'Employed an ensemble of 5 shallow feed-forward networks rather than a single deep model to provide epistemic uncertainty bounds in the prediction tail.',
+      'Integrated PySWMM bindings to automate headless simulation execution across multi-core CPUs.',
+    ],
+    status: 'Active Open Source',
+    limitations: [
+      'Assumes 1D box culvert cross-sections; 2D hydrodynamic overland flow coupling is in development.',
+    ],
+    license: 'MIT License',
+  },
+  {
+    id: 'gpc-ethiopia-assessment',
+    name: 'Geopolymer Concrete Assessment Engine',
+    tagline: 'Probabilistic LCA, unit-cost, and column reliability model for natural-pozzolan alkali-activated concrete',
+    role: 'Lead Developer & Researcher',
+    repoUrl: 'https://github.com/nguseyxc92/gpc-ethiopia-assessment',
+    techStack: ['Python', 'NumPy', 'SciPy', 'Monte Carlo Simulation', 'Matplotlib'],
+    architectureOverview: 'Probabilistic materials model evaluating embodied carbon (GWP), material economics across multiple supplier scenarios, and structural reliability per Eurocode EN 1990 column safety targets.',
+    engineeringProblem: 'Most literature evaluates green concretes against Ordinary Portland Cement (OPC), but in East Africa, Portland Pozzolana Cement (PPC) is standard. Furthermore, academic studies often omit the high market costs and transportation footprints of commercial sodium silicate and NaOH chemical activators.',
+    implementationHighlights: [
+      '10,000-iteration Monte Carlo engine quantifying 5th-95th percentile embodied carbon (135 to 201 kg CO2e/m³ for GPC vs 303 kg for PPC).',
+      'Three-tier probabilistic unit-cost analysis identifying the 89% market price premium of chemical activators.',
+      'Structural column limit-state reliability solver demonstrating target index beta = 4.8 with 4% area increase.',
+      'Spearman rank correlation module isolating sodium silicate solution as governing factor for both GWP (0.93) and cost (0.92).',
+    ],
+    technicalDecisions: [
+      'Used parametric probability distributions for material constituents calibrated directly on Ethiopian Roads Administration laboratory cube tests.',
+      'Exposed configurable price and emissions factors to evaluate future local silicate manufacturing scenarios.',
+    ],
+    status: 'Active Open Source',
+    limitations: [
+      'Requires laboratory validation for concrete-scale workability and long-term shrinkage.',
+    ],
+    license: 'MIT License',
+  },
+  {
+    id: 'tebib-labs',
+    name: 'Tebib Labs Engineering Platform',
+    tagline: 'Software engineering & applied R&D venture developing interactive scientific computing and structural reliability tools',
+    role: 'Founding Engineer',
+    repoUrl: 'https://github.com/nguseyxc92/tebib_labs',
+    liveUrl: 'https://tebib-labs.netlify.app/',
+    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Canvas / SVG'],
+    architectureOverview: 'Modern web architecture featuring client-side interactive telemetry visualizers, Bayesian probability explorers, and technical publications showcase.',
+    engineeringProblem: 'Scientific research often remains trapped in static academic PDFs and siloed scripts, preventing practicing structural engineers and municipal inspectors from interacting with probabilistic models.',
+    implementationHighlights: [
+      'Built interactive structural telemetry dashboards displaying sensor data and Bayesian reliability updates.',
+      'Implemented clean, accessible responsive layouts with zero reliance on generic templates.',
+      'Designed architecture for real-time scientific model interaction directly within web browsers.',
+    ],
+    technicalDecisions: [
+      'Adopted TypeScript and functional React architecture for maintainable component abstractions.',
+      'Tailwind CSS design token system for dark-mode telemetry aesthetics.',
+    ],
+    status: 'Production R&D',
+    limitations: [
+      'Currently acts as venture showcase; full cloud computation backend currently in alpha.',
+    ],
+    license: 'Proprietary / Open Front',
+  },
+  {
+    id: 'bayesian-reliability-engine',
+    name: 'Bayesian Reliability Updating Engine (BRUE)',
+    tagline: 'Browser-native WebAssembly framework for structural limit-state updating and proof test interpretation',
+    role: 'Principal Researcher & System Architect',
+    repoUrl: 'https://github.com/nguseyxc92',
+    techStack: ['C++', 'WebAssembly', 'TypeScript', 'Web Workers'],
+    architectureOverview: 'Ongoing R&D porting high-performance C++ structural cross-section analysis and MCMC kernels to WebAssembly, running inside background Web Workers for real-time field proof test decision support.',
+    engineeringProblem: 'Proof load test engineers on site require instant feedback on whether a bridge has reached its target posterior reliability index (beta = 4.0), so tests can be safely stopped before damage occurs.',
+    implementationHighlights: [
+      'Architected background Web Worker pipeline preventing UI thread blocking during 1,000,000-sample sampling runs.',
+      'Designed modular limit-state interfaces for flexure, shear (CSCT/CSDT), and multi-span load redistribution.',
+    ],
+    technicalDecisions: [
+      'Targeting WebAssembly (Wasm) compilation for computational parity with native desktop C++ binaries.',
+    ],
+    status: 'Research Prototype',
+    limitations: [
+      'Prototype stage; currently being developed in conjunction with upcoming doctoral research.',
+    ],
+    license: 'Research Open Source',
+  },
+];
